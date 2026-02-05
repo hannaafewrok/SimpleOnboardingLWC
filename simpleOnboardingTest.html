@@ -1,0 +1,49 @@
+<template>
+  <lightning-card title="Bank Onboarding - Step 1">
+    <div class="slds-p-around_medium">
+
+      <!-- Optional message -->
+      <template if:true={message}>
+        <div class="slds-text-body_small slds-m-bottom_small">{message}</div>
+      </template>
+
+      <div class="slds-box">
+        <p class="slds-text-title_caps slds-m-bottom_small">
+          Step 1: Employee Info (Copy)
+        </p>
+
+        <!-- This form CREATES a Bank_Onboarding__c record -->
+        <lightning-record-edit-form
+          object-api-name="Bank_Onboarding__c"
+          data-id="step1form"
+          onsuccess={handleSuccess}
+          onerror={handleError}
+        >
+          <lightning-messages></lightning-messages>
+
+          <lightning-input-field field-name="Full_Name__c"></lightning-input-field>
+          <lightning-input-field field-name="Employee_ID__c"></lightning-input-field>
+          <lightning-input-field field-name="Branch__c"></lightning-input-field>
+
+          <div class="slds-m-top_medium">
+            <lightning-button
+              variant="brand"
+              label="Save Step 1 (Copy)"
+              onclick={save}
+            ></lightning-button>
+          </div>
+        </lightning-record-edit-form>
+
+        <!-- Show the created record link after save -->
+        <template if:true={recordId}>
+          <div class="slds-m-top_medium">
+            <a href={recordLink} target="_blank" rel="noopener noreferrer">
+              Open created onboarding record
+            </a>
+          </div>
+        </template>
+      </div>
+
+    </div>
+  </lightning-card>
+</template>
