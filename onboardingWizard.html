@@ -1,0 +1,62 @@
+<!-- onboardingWizard.html -->
+<template>
+    <lightning-card title="Employee Lookup">
+        <div class="slds-p-around_medium">
+
+            <div class="slds-box slds-m-bottom_medium">
+                <p class="slds-text-title_caps slds-m-bottom_small">Search Employee</p>
+
+                <lightning-input
+                    label="Employee ID"
+                    value={employeeIdDraft}
+                    onchange={handleEmployeeIdDraftChange}
+                    disabled={hasEmployee}
+                ></lightning-input>
+
+                <div class="slds-m-top_small">
+                    <!-- Before found -->
+                    <template if:false={hasEmployee}>
+                        <lightning-button
+                            label="Search"
+                            variant="brand"
+                            onclick={handleSearch}
+                            disabled={isSearchDisabled}
+                        ></lightning-button>
+                    </template>
+
+                    <!-- After found -->
+                    <template if:true={hasEmployee}>
+                        <lightning-button
+                            label="Reset"
+                            variant="neutral"
+                            onclick={handleReset}
+                        ></lightning-button>
+                    </template>
+                </div>
+
+                <template if:true={message}>
+                    <div class={messageClass}>{message}</div>
+                </template>
+            </div>
+
+            <!-- Triggers lookup after search -->
+            <template if:true={employeeId}>
+                <c-employee-lookup
+                    employee-id={employeeId}
+                    onlookupresult={handleLookupResult}
+                ></c-employee-lookup>
+            </template>
+
+            <!-- Summary -->
+            <template if:true={hasEmployee}>
+                <c-employee-summary
+                    record-id={employeeRecordId}
+                    employee={employee}
+                    show-done
+                    ondone={handleDone}
+                ></c-employee-summary>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>
