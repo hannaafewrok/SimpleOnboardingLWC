@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Employee Created</masterLabel>
+    <isExposed>true</isExposed>
+    <description>Published when a new Employee__c is created so other components can search it.</description>
+
+    <lightningMessageFields>
+        <fieldName>employeeId</fieldName>
+        <description>Employee_ID__c value</description>
+    </lightningMessageFields>
+
+    <lightningMessageFields>
+        <fieldName>recordId</fieldName>
+        <description>Employee__c record Id</description>
+    </lightningMessageFields>
+</LightningMessageChannel>
